@@ -42,18 +42,24 @@ const projectSections = [
     projects: [
       {
         id: '4',
+        title: 'AI Bookmark Organizer',
+        description: 'Smart browser extension that automatically organizes bookmarks using AI-powered semantic categorization — no API key required',
+        category: 'recent',
+      },
+      {
+        id: '5',
         title: 'Email Automation Tool',
         description: 'Batch email processing and scheduling',
         category: 'recent',
       },
       {
-        id: '5',
+        id: '6',
         title: 'File Management System',
         description: 'Automated file organization and backup',
         category: 'recent',
       },
       {
-        id: '6',
+        id: '7',
         title: 'Monitoring Dashboard',
         description: 'Real-time system monitoring and alerts',
         category: 'recent',
