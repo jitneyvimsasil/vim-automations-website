@@ -18,8 +18,8 @@ const projectSections = [
     projects: [
       {
         id: '1',
-        title: 'Workflow Automation Suite',
-        description: 'Enterprise-grade automation for complex workflows',
+        title: 'AI Trends Daily Publisher',
+        description: 'n8n workflow that researches daily AI trends, composes a write-up, generates an image, and automatically posts to Facebook via IFTTT webhooks',
         category: 'featured',
       },
       {
