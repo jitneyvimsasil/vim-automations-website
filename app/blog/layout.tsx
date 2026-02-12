@@ -1,5 +1,6 @@
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
+import { TracingBeam } from '@/components/ui/tracing-beam';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
@@ -16,7 +17,9 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
             <ArrowLeft className="w-4 h-4" />
             Back to home
           </Link>
-          <article className="prose-custom">{children}</article>
+          <TracingBeam>
+            <article className="prose-custom">{children}</article>
+          </TracingBeam>
         </div>
       </div>
       <Footer />
