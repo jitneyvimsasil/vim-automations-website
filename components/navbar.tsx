@@ -83,6 +83,19 @@ export function Navbar() {
             About
           </Link>
           <button
+            onClick={() => {
+              const el = document.getElementById('contact');
+              if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+              } else {
+                window.location.href = '/#contact';
+              }
+            }}
+            className="px-4 py-1.5 rounded-lg text-sm font-semibold bg-[#e0ff4f] text-[#00272b] hover:shadow-lg hover:shadow-[#e0ff4f]/30 hover:scale-105 transition-all duration-200"
+          >
+            Get in Touch
+          </button>
+          <button
             onClick={toggleTheme}
             className="p-2 text-foreground hover:bg-secondary rounded-lg transition-colors duration-200"
             aria-label="Toggle theme"
@@ -150,6 +163,20 @@ export function Navbar() {
             >
               About
             </Link>
+            <button
+              onClick={() => {
+                setMenuOpen(false);
+                const el = document.getElementById('contact');
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                  window.location.href = '/#contact';
+                }
+              }}
+              className="w-full mt-2 px-4 py-2 rounded-lg text-sm font-semibold bg-[#e0ff4f] text-[#00272b] hover:shadow-lg hover:shadow-[#e0ff4f]/30 transition-all duration-200 text-center"
+            >
+              Get in Touch
+            </button>
           </div>
         </div>
       )}

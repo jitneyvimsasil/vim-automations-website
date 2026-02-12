@@ -1,4 +1,21 @@
-import { Mail, Github, Linkedin, Facebook } from 'lucide-react';
+'use client';
+
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { toast } from 'sonner';
+import { Mail, Github, Linkedin, Facebook, Send, Loader2 } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 function ThreadsIcon({ className }: { className?: string }) {
   return (
@@ -8,62 +25,220 @@ function ThreadsIcon({ className }: { className?: string }) {
   );
 }
 
+const contactSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  email: z.string().email('Please enter a valid email'),
+  projectType: z.string().min(1, 'Please select a project type'),
+  message: z.string().optional(),
+});
+
+type ContactFormData = z.infer<typeof contactSchema>;
+
 export function Contact() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      projectType: '',
+      message: '',
+    },
+  });
+
+  const onSubmit = async (data: ContactFormData) => {
+    setIsSubmitting(true);
+    try {
+      const webhookUrl = process.env.NEXT_PUBLIC_N8N_CONTACT_WEBHOOK_URL;
+      if (!webhookUrl) {
+        toast.error('Contact form is not configured yet. Please email me directly.');
+        return;
+      }
+
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) throw new Error('Failed to send');
+
+      toast.success("Message sent! I'll get back to you soon.");
+      reset();
+    } catch {
+      toast.error('Something went wrong. Please try emailing me directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
-    <section className="py-20 px-6">
-      <div className="max-w-3xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-semibold mb-4 bg-gradient-to-r from-[#e0ff4f] to-[#a0c830] bg-clip-text text-transparent">
-          Let&apos;s work together
-        </h2>
-        <p className="text-base text-muted-foreground mb-12 leading-relaxed">
-          Have a project in mind? Get in touch and let&apos;s discuss your automation needs.
-        </p>
+    <section id="contact" className="py-20 px-6">
+      <div className="max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+          {/* Left column — Info + Social */}
+          <div>
+            <span className="text-xs font-bold uppercase tracking-[0.2em] bg-gradient-to-r from-[#e0ff4f] to-[#a0c830] bg-clip-text text-transparent">
+              Contact
+            </span>
+            <h2 className="text-3xl md:text-4xl font-semibold mt-3 mb-4 bg-gradient-to-r from-[#e0ff4f] to-[#a0c830] bg-clip-text text-transparent">
+              Let&apos;s Build Something Together
+            </h2>
+            <p className="text-base text-muted-foreground leading-relaxed mb-8">
+              Have a workflow to automate, an AI agent to build, or an app idea
+              to bring to life? Tell me about your project and I&apos;ll get
+              back to you within 24 hours.
+            </p>
 
-        <a
-          href="mailto:jitneyvimsasil@gmail.com"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-[#00272b] bg-[#e0ff4f] hover:shadow-lg hover:shadow-[#e0ff4f]/30 hover:scale-105 transition-all duration-200 mb-12"
-        >
-          <Mail className="w-5 h-5" />
-          Send an email
-        </a>
+            <div className="flex gap-3 mb-8">
+              <a
+                href="https://github.com/jitneyvimsasil"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 text-[#e0ff4f] bg-[#e0ff4f]/10 rounded-lg hover:bg-[#e0ff4f]/20 transition-all duration-200 hover:scale-110"
+                aria-label="GitHub"
+              >
+                <Github className="w-5 h-5" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/jitneyvimsasil/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 text-[#e0ff4f] bg-[#e0ff4f]/10 rounded-lg hover:bg-[#e0ff4f]/20 transition-all duration-200 hover:scale-110"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="w-5 h-5" />
+              </a>
+              <a
+                href="https://www.facebook.com/profile.php?id=61587438807218"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 text-[#e0ff4f] bg-[#e0ff4f]/10 rounded-lg hover:bg-[#e0ff4f]/20 transition-all duration-200 hover:scale-110"
+                aria-label="Facebook"
+              >
+                <Facebook className="w-5 h-5" />
+              </a>
+              <a
+                href="https://www.threads.com/@jitneeey"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 text-[#e0ff4f] bg-[#e0ff4f]/10 rounded-lg hover:bg-[#e0ff4f]/20 transition-all duration-200 hover:scale-110"
+                aria-label="Threads"
+              >
+                <ThreadsIcon className="w-5 h-5" />
+              </a>
+            </div>
 
-        <div className="flex gap-4 justify-center">
-          <a
-            href="https://github.com/jitneyvimsasil"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-3 text-[#e0ff4f] bg-[#e0ff4f]/10 rounded-lg hover:bg-[#e0ff4f]/20 transition-all duration-200 hover:scale-110"
-            aria-label="GitHub"
-          >
-            <Github className="w-5 h-5" />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/jitneyvimsasil/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-3 text-[#e0ff4f] bg-[#e0ff4f]/10 rounded-lg hover:bg-[#e0ff4f]/20 transition-all duration-200 hover:scale-110"
-            aria-label="LinkedIn"
-          >
-            <Linkedin className="w-5 h-5" />
-          </a>
-          <a
-            href="https://www.facebook.com/profile.php?id=61587438807218"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-3 text-[#e0ff4f] bg-[#e0ff4f]/10 rounded-lg hover:bg-[#e0ff4f]/20 transition-all duration-200 hover:scale-110"
-            aria-label="Facebook"
-          >
-            <Facebook className="w-5 h-5" />
-          </a>
-          <a
-            href="https://www.threads.com/@jitneeey"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-3 text-[#e0ff4f] bg-[#e0ff4f]/10 rounded-lg hover:bg-[#e0ff4f]/20 transition-all duration-200 hover:scale-110"
-            aria-label="Threads"
-          >
-            <ThreadsIcon className="w-5 h-5" />
-          </a>
+            <a
+              href="mailto:jitneyvimsasil@gmail.com"
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200"
+            >
+              <Mail className="w-4 h-4" />
+              jitneyvimsasil@gmail.com
+            </a>
+          </div>
+
+          {/* Right column — Form */}
+          <div>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="space-y-5 p-6 rounded-xl bg-gradient-to-br from-[#e0ff4f]/5 to-[#00272b]/10 border border-[#e0ff4f]/20"
+            >
+              <div className="space-y-2">
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  id="name"
+                  placeholder="Your name"
+                  aria-invalid={!!errors.name}
+                  {...register('name')}
+                />
+                {errors.name && (
+                  <p className="text-xs text-destructive">{errors.name.message}</p>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  aria-invalid={!!errors.email}
+                  {...register('email')}
+                />
+                {errors.email && (
+                  <p className="text-xs text-destructive">{errors.email.message}</p>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="projectType">Project Type</Label>
+                <Select
+                  onValueChange={(value) => setValue('projectType', value)}
+                >
+                  <SelectTrigger className="w-full" aria-invalid={!!errors.projectType}>
+                    <SelectValue placeholder="Select a project type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="workflow-automation">
+                      Workflow Automation
+                    </SelectItem>
+                    <SelectItem value="ai-agent">
+                      AI Agent / Chatbot
+                    </SelectItem>
+                    <SelectItem value="web-app">
+                      Full-Stack Web App
+                    </SelectItem>
+                    <SelectItem value="content-automation">
+                      Content Automation
+                    </SelectItem>
+                    <SelectItem value="other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
+                {errors.projectType && (
+                  <p className="text-xs text-destructive">{errors.projectType.message}</p>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="message">
+                  Message{' '}
+                  <span className="text-muted-foreground font-normal">(optional)</span>
+                </Label>
+                <Textarea
+                  id="message"
+                  placeholder="Tell me about your project..."
+                  rows={4}
+                  {...register('message')}
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-semibold bg-[#e0ff4f] text-[#00272b] hover:shadow-lg hover:shadow-[#e0ff4f]/30 hover:scale-[1.02] transition-all duration-200 disabled:opacity-50 disabled:hover:scale-100 disabled:hover:shadow-none"
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" />
+                    Send Message
+                  </>
+                )}
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </section>
