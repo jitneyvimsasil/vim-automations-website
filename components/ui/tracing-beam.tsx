@@ -18,6 +18,7 @@ export function TracingBeam({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const svgHeightRef = useRef(0);
   const [svgHeight, setSvgHeight] = useState(0);
 
   const { scrollYProgress } = useScroll({
@@ -25,30 +26,32 @@ export function TracingBeam({
     offset: ['start start', 'end end'],
   });
 
+  // Use function form so it reads the latest height from the ref on every scroll frame
   const y1 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [50, svgHeight]),
+    useTransform(scrollYProgress, (v) => 50 + v * (svgHeightRef.current - 50)),
     { stiffness: 500, damping: 90 }
   );
   const y2 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [50, svgHeight - 50]),
+    useTransform(scrollYProgress, (v) => 50 + v * (svgHeightRef.current - 100)),
     { stiffness: 500, damping: 90 }
   );
 
+  // ResizeObserver fires on initial paint (including after client-side navigation)
+  // and on any subsequent size changes (window resize, dynamic content)
   useEffect(() => {
-    if (contentRef.current) {
-      setSvgHeight(contentRef.current.offsetHeight);
-    }
-  }, []);
+    const el = contentRef.current;
+    if (!el) return;
 
-  // Recalculate on resize
-  useEffect(() => {
-    const handleResize = () => {
-      if (contentRef.current) {
-        setSvgHeight(contentRef.current.offsetHeight);
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const height = entry.contentRect.height;
+        svgHeightRef.current = height;
+        setSvgHeight(height);
       }
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    });
+
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   return (
