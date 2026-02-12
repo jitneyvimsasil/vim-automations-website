@@ -10,19 +10,19 @@ export function Footer() {
         <div className="flex gap-8">
           <a
             href="#"
-            className="text-xs font-medium text-muted-foreground hover:text-blue-400 transition-colors duration-200"
+            className="text-xs font-medium text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200"
           >
             About
           </a>
           <a
             href="#"
-            className="text-xs font-medium text-muted-foreground hover:text-purple-400 transition-colors duration-200"
+            className="text-xs font-medium text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200"
           >
             Projects
           </a>
           <a
             href="#"
-            className="text-xs font-medium text-muted-foreground hover:text-indigo-400 transition-colors duration-200"
+            className="text-xs font-medium text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200"
           >
             Contact
           </a>

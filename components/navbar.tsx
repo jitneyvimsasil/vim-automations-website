@@ -42,7 +42,7 @@ export function Navbar() {
       <div className="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
         <Link
           href="/"
-          className="text-sm font-bold tracking-tight bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent hover:opacity-80 transition-opacity duration-200"
+          className="text-sm font-bold tracking-tight bg-gradient-to-r from-[#e0ff4f] to-[#a0c830] bg-clip-text text-transparent hover:opacity-80 transition-opacity duration-200"
         >
           vim-automations
         </Link>

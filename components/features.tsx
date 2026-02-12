@@ -33,12 +33,12 @@ export function Features() {
           {features.map((feature, index) => (
             <div 
               key={index} 
-              className="group p-6 rounded-xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-blue-400/30 hover:border-purple-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20 hover:-translate-y-1"
+              className="group p-6 rounded-xl bg-gradient-to-br from-[#e0ff4f]/10 to-[#00272b]/10 border border-[#e0ff4f]/30 hover:border-[#e0ff4f]/60 transition-all duration-300 hover:shadow-lg hover:shadow-[#e0ff4f]/20 hover:-translate-y-1"
             >
-              <div className="text-blue-400 group-hover:text-purple-400 transition-colors duration-300 mb-3 group-hover:scale-110 transform duration-300">
+              <div className="text-[#e0ff4f] group-hover:text-[#a0c830] transition-colors duration-300 mb-3 group-hover:scale-110 transform duration-300">
                 {feature.icon}
               </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 group-hover:bg-clip-text group-hover:text-transparent transition-all">
+              <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:bg-gradient-to-r group-hover:from-[#e0ff4f] group-hover:to-[#a0c830] group-hover:bg-clip-text group-hover:text-transparent transition-all">
                 {feature.title}
               </h3>
               <p className="text-base text-muted-foreground leading-relaxed">
