@@ -38,10 +38,10 @@ export function Features() {
               <div className="text-blue-400 group-hover:text-purple-400 transition-colors duration-300 mb-3 group-hover:scale-110 transform duration-300">
                 {feature.icon}
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2 group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 group-hover:bg-clip-text group-hover:text-transparent transition-all">
+              <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 group-hover:bg-clip-text group-hover:text-transparent transition-all">
                 {feature.title}
               </h3>
-              <p className="text-base text-gray-300 leading-relaxed">
+              <p className="text-base text-muted-foreground leading-relaxed">
                 {feature.description}
               </p>
             </div>

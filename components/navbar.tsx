@@ -9,9 +9,14 @@ export function Navbar() {
   const [theme, setTheme] = useState('light');
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setTheme(savedTheme);
-    document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+    try {
+      const savedTheme = localStorage.getItem('theme');
+      const validTheme = savedTheme === 'dark' ? 'dark' : 'light';
+      setTheme(validTheme);
+      document.documentElement.classList.toggle('dark', validTheme === 'dark');
+    } catch {
+      setTheme('light');
+    }
 
     const handleScroll = () => {
       setScrolled(window.scrollY > 0);

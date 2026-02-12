@@ -34,6 +34,13 @@ const projectSections = [
         description: 'Seamless third-party API integration',
         category: 'featured',
       },
+      {
+        id: '8',
+        title: 'Fitness Coach AI',
+        description:
+          'Chat-based fitness coaching app powered by Claude AI with gamification — daily streaks, XP levels, badges, and personalized workout and nutrition guidance.',
+        category: 'featured',
+      },
     ],
   },
   {
@@ -102,7 +109,7 @@ export function ProjectCard({ project }: { project: Project }) {
 
       {/* Content */}
       <div className="flex justify-between items-start mb-2">
-        <h3 className="text-base font-semibold text-white group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
+        <h3 className="text-base font-semibold text-foreground group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
           {project.title}
         </h3>
         <ExternalLink
@@ -111,7 +118,7 @@ export function ProjectCard({ project }: { project: Project }) {
           }`}
         />
       </div>
-      <p className="text-sm text-gray-300">{project.description}</p>
+      <p className="text-sm text-muted-foreground">{project.description}</p>
     </div>
   );
 }

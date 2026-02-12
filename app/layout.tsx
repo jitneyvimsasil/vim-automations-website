@@ -4,9 +4,24 @@ import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'AI Automation Portfolio',
-  description: 'Showcasing AI automation projects and solutions',
-  generator: 'v0.app',
+  title: 'vim-automations | AI Automation Portfolio',
+  description:
+    'Building intelligent automation solutions — n8n workflows, AI integrations, and production web apps.',
+  keywords: ['AI automation', 'n8n', 'workflow automation', 'web apps', 'AI agents'],
+  authors: [{ name: 'vim-automations' }],
+  openGraph: {
+    title: 'vim-automations | AI Automation Portfolio',
+    description:
+      'Building intelligent automation solutions that transform businesses.',
+    type: 'website',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'vim-automations | AI Automation Portfolio',
+    description:
+      'Building intelligent automation solutions that transform businesses.',
+  },
   icons: {
     icon: [
       {
