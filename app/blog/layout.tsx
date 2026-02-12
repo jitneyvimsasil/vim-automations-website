@@ -8,7 +8,7 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
       <div className="pt-24 pb-20 px-6">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <Link
             href="/"
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200 mb-8"

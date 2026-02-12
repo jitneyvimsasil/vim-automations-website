@@ -224,7 +224,7 @@ export function LogoMarquee() {
           Tools & Technologies
         </h3>
       </div>
-      <div className="relative space-y-6">
+      <div className="relative space-y-6 max-w-5xl mx-auto">
         {/* Gradient fade edges */}
         <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[var(--background)] to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[var(--background)] to-transparent z-10 pointer-events-none" />

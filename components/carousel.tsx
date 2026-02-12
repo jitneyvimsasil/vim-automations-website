@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
@@ -47,43 +48,44 @@ export function Carousel() {
     <div className="relative">
       {/* Carousel Container */}
       <div className="overflow-hidden">
-        <div
-          className="flex transition-transform duration-500 ease-out"
-          style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-        >
-          {slides.map((slide, index) => (
-            <div key={index} className="min-w-full">
-              <div className="relative bg-gradient-to-br from-[#e0ff4f]/5 via-[#00272b]/20 to-[#0d4f55]/30 dark:from-[#e0ff4f]/5 dark:via-[#003d42]/30 dark:to-[#00272b] border border-[#e0ff4f]/20 dark:border-[#e0ff4f]/20 rounded-2xl p-8 md:p-12 hover:shadow-lg hover:shadow-[#e0ff4f]/10 transition-all duration-300 overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#e0ff4f]/0 via-[#e0ff4f]/0 to-[#e0ff4f]/0 group-hover:from-[#e0ff4f]/5 group-hover:via-[#e0ff4f]/3 group-hover:to-[#e0ff4f]/5 transition-all duration-300" />
-                <div className="relative z-10">
-                  <h3 className="text-2xl md:text-3xl font-semibold mb-4 bg-gradient-to-r from-[#e0ff4f] to-[#a0c830] bg-clip-text text-transparent">
-                    {slide.title}
-                  </h3>
-                  <p className="text-base md:text-lg text-muted-foreground mb-8 leading-relaxed max-w-2xl">
-                    {slide.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-8">
-                    {slide.tags.map((tag, idx) => (
-                      <span
-                        key={idx}
-                        className="px-3 py-1.5 rounded-full text-sm font-medium text-[#e0ff4f] bg-[#e0ff4f]/10 border border-[#e0ff4f]/20 hover:bg-[#e0ff4f]/20 transition-all duration-200 hover:scale-105"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <Link
-                    href={slide.link}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-semibold bg-[#e0ff4f] text-[#00272b] hover:shadow-lg hover:shadow-[#e0ff4f]/30 hover:scale-105 transition-all duration-200"
-                  >
-                    View Project
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentSlide}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.45, ease: 'easeOut' }}
+          >
+            <div className="relative bg-gradient-to-br from-[#e0ff4f]/5 via-[#00272b]/20 to-[#0d4f55]/30 dark:from-[#e0ff4f]/5 dark:via-[#003d42]/30 dark:to-[#00272b] border border-[#e0ff4f]/20 dark:border-[#e0ff4f]/20 rounded-2xl p-8 md:p-12 hover:shadow-lg hover:shadow-[#e0ff4f]/10 transition-all duration-300 overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-r from-[#e0ff4f]/0 via-[#e0ff4f]/0 to-[#e0ff4f]/0 group-hover:from-[#e0ff4f]/5 group-hover:via-[#e0ff4f]/3 group-hover:to-[#e0ff4f]/5 transition-all duration-300" />
+              <div className="relative z-10">
+                <h3 className="text-2xl md:text-3xl font-semibold mb-4 bg-gradient-to-r from-[#e0ff4f] to-[#a0c830] bg-clip-text text-transparent">
+                  {slides[currentSlide].title}
+                </h3>
+                <p className="text-base md:text-lg text-muted-foreground mb-8 leading-relaxed max-w-2xl">
+                  {slides[currentSlide].description}
+                </p>
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {slides[currentSlide].tags.map((tag, idx) => (
+                    <span
+                      key={idx}
+                      className="px-3 py-1.5 rounded-full text-sm font-medium text-[#e0ff4f] bg-[#e0ff4f]/10 border border-[#e0ff4f]/20 hover:bg-[#e0ff4f]/20 transition-all duration-200 hover:scale-105"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
+                <Link
+                  href={slides[currentSlide].link}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-semibold bg-[#e0ff4f] text-[#00272b] hover:shadow-lg hover:shadow-[#e0ff4f]/30 hover:scale-105 transition-all duration-200"
+                >
+                  View Project
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
               </div>
             </div>
-          ))}
-        </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
 
       {/* Navigation Buttons */}

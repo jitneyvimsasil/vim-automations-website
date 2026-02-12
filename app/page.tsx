@@ -14,11 +14,11 @@ export default function Home() {
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-5xl mx-auto">
-          <div className="mb-16">
+          <div className="mb-16 text-center">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 bg-gradient-to-r from-[#e0ff4f] to-[#a0c830] bg-clip-text text-transparent">
               Automating Excellence
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed">
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
               Streamline your workflow with powerful automation solutions designed for modern teams.
             </p>
           </div>

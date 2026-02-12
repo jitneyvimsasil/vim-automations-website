@@ -95,7 +95,7 @@ export function ProjectCard({ project }: { project: Project }) {
 
 export function Projects() {
   return (
-    <section className="py-20 px-6">
+    <section id="projects" className="py-20 px-6">
       <div className="max-w-5xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-semibold mb-16 bg-gradient-to-r from-[#e0ff4f] to-[#a0c830] bg-clip-text text-transparent">
           Projects

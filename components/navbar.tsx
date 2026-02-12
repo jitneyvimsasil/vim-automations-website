@@ -46,17 +46,44 @@ export function Navbar() {
         >
           vim-automations
         </Link>
-        <button
-          onClick={toggleTheme}
-          className="p-2 text-foreground hover:bg-secondary rounded-lg transition-colors duration-200"
-          aria-label="Toggle theme"
-        >
-          {theme === 'light' ? (
-            <Moon className="w-4 h-4" />
-          ) : (
-            <Sun className="w-4 h-4" />
-          )}
-        </button>
+        <div className="flex items-center gap-6">
+          <button
+            onClick={() => {
+              const el = document.getElementById('projects');
+              if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+            className="text-sm text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200"
+          >
+            Projects
+          </button>
+          <Link
+            href="/blog"
+            target="_blank"
+            className="text-sm text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200"
+          >
+            Blog
+          </Link>
+          <Link
+            href="/about"
+            target="_blank"
+            className="text-sm text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200"
+          >
+            About
+          </Link>
+          <button
+            onClick={toggleTheme}
+            className="p-2 text-foreground hover:bg-secondary rounded-lg transition-colors duration-200"
+            aria-label="Toggle theme"
+          >
+            {theme === 'light' ? (
+              <Moon className="w-4 h-4" />
+            ) : (
+              <Sun className="w-4 h-4" />
+            )}
+          </button>
+        </div>
       </div>
     </nav>
   );
