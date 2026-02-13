@@ -61,7 +61,7 @@ function WorkflowVisual() {
     <motion.div
       initial="hidden"
       animate="visible"
-      className="relative w-full aspect-square max-w-[460px] mx-auto"
+      className="relative w-full mx-auto"
     >
       {/* Ambient glow behind the diagram */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_#e0ff4f08_0%,_transparent_70%)]" />
@@ -203,14 +203,6 @@ function WorkflowVisual() {
         Live
       </motion.div>
 
-      <motion.div
-        className="absolute bottom-16 left-4 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#003d42] border border-[#0d4f55] text-[10px] text-muted-foreground font-medium"
-        initial={{ opacity: 0, x: -10 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 1.8, duration: 0.5 }}
-      >
-        24/7 uptime
-      </motion.div>
     </motion.div>
   );
 }

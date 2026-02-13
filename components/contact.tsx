@@ -134,15 +134,14 @@ export function Contact() {
               >
                 <ThreadsIcon className="w-5 h-5" />
               </a>
+              <a
+                href="mailto:jitneyvimsasil@gmail.com"
+                className="p-3 text-[#e0ff4f] bg-[#e0ff4f]/10 rounded-lg hover:bg-[#e0ff4f]/20 transition-all duration-200 hover:scale-110"
+                aria-label="Email"
+              >
+                <Mail className="w-5 h-5" />
+              </a>
             </div>
-
-            <a
-              href="mailto:jitneyvimsasil@gmail.com"
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200"
-            >
-              <Mail className="w-4 h-4" />
-              jitneyvimsasil@gmail.com
-            </a>
           </div>
 
           {/* Right column — Form */}
