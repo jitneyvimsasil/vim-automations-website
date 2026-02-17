@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Sun, Moon, Menu, X } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -52,9 +53,18 @@ export function Navbar() {
       <div className="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
         <Link
           href="/"
-          className="relative z-10 text-sm font-bold tracking-tight bg-gradient-to-r from-[#e0ff4f] to-[#a0c830] bg-clip-text text-transparent hover:opacity-80 transition-opacity duration-200"
+          className="relative z-10 flex items-center gap-2 text-sm font-bold tracking-tight hover:opacity-80 transition-opacity duration-200"
         >
-          vim-automations
+          <Image
+            src="/vim-automations-logo-1.png"
+            alt="vim-automations logo"
+            width={28}
+            height={28}
+            className="rounded-sm"
+          />
+          <span className="bg-gradient-to-r from-[#e0ff4f] to-[#a0c830] bg-clip-text text-transparent">
+            vim-automations
+          </span>
         </Link>
 
         {/* Desktop nav */}
@@ -64,6 +74,8 @@ export function Navbar() {
               const el = document.getElementById('projects');
               if (el) {
                 el.scrollIntoView({ behavior: 'smooth' });
+              } else {
+                window.location.href = '/#projects';
               }
             }}
             className="text-sm text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200"
@@ -145,6 +157,8 @@ export function Navbar() {
                 const el = document.getElementById('projects');
                 if (el) {
                   el.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                  window.location.href = '/#projects';
                 }
               }}
               className="text-sm text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200 text-left"

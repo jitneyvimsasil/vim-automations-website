@@ -3,63 +3,22 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Play, ExternalLink } from 'lucide-react';
+import { Play, ExternalLink, ArrowRight } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
   DialogTitle,
 } from '@/components/ui/dialog';
+import { allProjects, type Project } from '@/lib/projects-data';
 
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  thumbnail: string;
-  videoUrl?: string;
-  blogUrl?: string;
-  category: string;
-}
+const featuredProjects = allProjects.filter((p) => p.featured);
+const recentProjects = allProjects.filter((p) => !p.featured);
 
 const projectSections = [
-  {
-    title: 'Featured Projects',
-    category: 'featured',
-    projects: [
-      {
-        id: '1',
-        title: 'AI Trends Daily Publisher',
-        description: 'n8n workflow that researches daily AI trends, composes a write-up, generates an image, and automatically posts to Facebook via IFTTT webhooks',
-        thumbnail: '/projects/ai-trends-publisher.png',
-        videoUrl: 'YOUR_YOUTUBE_VIDEO_ID_HERE',
-        blogUrl: '/blog/ai-trends-daily-publisher',
-        category: 'featured',
-      },
-      {
-        id: '8',
-        title: 'Fitness Coach AI',
-        description:
-          'Chat-based fitness coaching app powered by Claude AI with gamification — daily streaks, XP levels, badges, and personalized workout and nutrition guidance.',
-        thumbnail: '/projects/fitness-coach.png',
-        videoUrl: 'YOUR_YOUTUBE_VIDEO_ID_HERE',
-        blogUrl: '/blog/fitness-coach-ai',
-        category: 'featured',
-      },
-    ],
-  },
-  {
-    title: 'Recent Projects',
-    category: 'recent',
-    projects: [
-      {
-        id: '4',
-        title: 'AI Bookmark Organizer',
-        description: 'Smart browser extension that automatically organizes bookmarks using AI-powered semantic categorization — no API key required',
-        thumbnail: '/placeholder.jpg',
-        videoUrl: 'YOUR_YOUTUBE_VIDEO_ID_HERE',
-        category: 'recent',
-      },
-    ],
-  },
+  { title: 'Featured Projects', projects: featuredProjects },
+  ...(recentProjects.length > 0
+    ? [{ title: 'Recent Projects', projects: recentProjects }]
+    : []),
 ];
 
 export function ProjectCard({ project }: { project: Project }) {
@@ -119,6 +78,20 @@ export function ProjectCard({ project }: { project: Project }) {
           )}
         </div>
         <p className="text-sm text-muted-foreground">{project.description}</p>
+
+        {/* Tags */}
+        {project.tags && project.tags.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 mt-3">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="px-2 py-0.5 rounded-full text-xs font-medium text-[#e0ff4f]/80 bg-[#e0ff4f]/10 border border-[#e0ff4f]/15"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Video Modal */}
@@ -167,6 +140,16 @@ export function Projects() {
             </div>
           </div>
         ))}
+
+        <div className="flex justify-center">
+          <Link
+            href="/projects"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#e0ff4f] hover:text-[#a0c830] transition-colors duration-200 group"
+          >
+            View all projects
+            <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+          </Link>
+        </div>
       </div>
     </section>
   );
