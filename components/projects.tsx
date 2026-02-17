@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Play, ExternalLink } from 'lucide-react';
 import {
   Dialog,
@@ -15,6 +16,7 @@ interface Project {
   description: string;
   thumbnail: string;
   videoUrl?: string;
+  blogUrl?: string;
   category: string;
 }
 
@@ -29,6 +31,7 @@ const projectSections = [
         description: 'n8n workflow that researches daily AI trends, composes a write-up, generates an image, and automatically posts to Facebook via IFTTT webhooks',
         thumbnail: '/projects/ai-trends-publisher.png',
         videoUrl: 'YOUR_YOUTUBE_VIDEO_ID_HERE',
+        blogUrl: '/blog/ai-trends-daily-publisher',
         category: 'featured',
       },
       {
@@ -38,6 +41,7 @@ const projectSections = [
           'Chat-based fitness coaching app powered by Claude AI with gamification — daily streaks, XP levels, badges, and personalized workout and nutrition guidance.',
         thumbnail: '/projects/fitness-coach.png',
         videoUrl: 'YOUR_YOUTUBE_VIDEO_ID_HERE',
+        blogUrl: '/blog/fitness-coach-ai',
         category: 'featured',
       },
     ],
@@ -99,14 +103,20 @@ export function ProjectCard({ project }: { project: Project }) {
 
         {/* Content */}
         <div className="flex justify-between items-start mb-2">
-          <h3 className="text-base font-semibold text-foreground group-hover:bg-gradient-to-r group-hover:from-[#e0ff4f] group-hover:to-[#a0c830] group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
-            {project.title}
-          </h3>
-          <ExternalLink
-            className={`w-4 h-4 text-[#e0ff4f] transition-all duration-300 flex-shrink-0 group-hover:scale-125 ${
-              isHovered ? 'opacity-100' : 'opacity-50'
-            }`}
-          />
+          {project.blogUrl ? (
+            <Link href={project.blogUrl} className="flex items-start gap-2 group/link">
+              <h3 className="text-base font-semibold text-foreground group-hover/link:bg-gradient-to-r group-hover/link:from-[#e0ff4f] group-hover/link:to-[#a0c830] group-hover/link:bg-clip-text group-hover/link:text-transparent transition-all duration-300">
+                {project.title}
+              </h3>
+              <ExternalLink
+                className="w-4 h-4 text-[#e0ff4f] transition-all duration-300 flex-shrink-0 mt-0.5 opacity-50 group-hover/link:opacity-100 group-hover/link:scale-125"
+              />
+            </Link>
+          ) : (
+            <h3 className="text-base font-semibold text-foreground">
+              {project.title}
+            </h3>
+          )}
         </div>
         <p className="text-sm text-muted-foreground">{project.description}</p>
       </div>
@@ -150,11 +160,7 @@ export function Projects() {
             <h3 className="text-xs font-bold uppercase tracking-[0.2em] bg-gradient-to-r from-[#e0ff4f] to-[#a0c830] bg-clip-text text-transparent mb-8">
               {section.title}
             </h3>
-            <div className={`grid gap-8 ${
-              section.projects.length === 1
-                ? 'grid-cols-1 max-w-md'
-                : 'grid-cols-1 md:grid-cols-2'
-            }`}>
+            <div className="grid gap-8 grid-cols-1 md:grid-cols-2">
               {section.projects.map((project) => (
                 <ProjectCard key={project.id} project={project} />
               ))}
