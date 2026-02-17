@@ -29,8 +29,11 @@ const contactSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   email: z.string().email('Please enter a valid email'),
   projectType: z.string().min(1, 'Please select a project type'),
-  message: z.string().optional(),
+  message: z.string().max(2000, 'Message must be under 2000 characters').optional(),
+  website: z.string().max(0).optional(), // honeypot — bots fill this, humans don't see it
 });
+
+const RATE_LIMIT = { max: 3, windowMs: 10 * 60 * 1000 } as const;
 
 type ContactFormData = z.infer<typeof contactSchema>;
 
@@ -42,6 +45,7 @@ export function Contact() {
     handleSubmit,
     setValue,
     reset,
+    watch,
     formState: { errors },
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
@@ -50,10 +54,27 @@ export function Contact() {
       email: '',
       projectType: '',
       message: '',
+      website: '',
     },
   });
 
   const onSubmit = async (data: ContactFormData) => {
+    // Honeypot check — bots fill this hidden field, humans never see it
+    if (data.website) {
+      toast.success("Message sent! I'll get back to you soon.");
+      reset();
+      return;
+    }
+
+    // Rate limiting — max 3 submissions per 10 minutes
+    const now = Date.now();
+    const stored: number[] = JSON.parse(localStorage.getItem('contact_submissions') || '[]');
+    const recent = stored.filter((t) => now - t < RATE_LIMIT.windowMs);
+    if (recent.length >= RATE_LIMIT.max) {
+      toast.error("You've sent too many messages. Please wait a few minutes.");
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       const webhookUrl = process.env.NEXT_PUBLIC_N8N_CONTACT_WEBHOOK_URL;
@@ -62,13 +83,17 @@ export function Contact() {
         return;
       }
 
+      const { website: _, ...formData } = data;
       const response = await fetch(webhookUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify(formData),
       });
 
       if (!response.ok) throw new Error('Failed to send');
+
+      recent.push(now);
+      localStorage.setItem('contact_submissions', JSON.stringify(recent));
 
       toast.success("Message sent! I'll get back to you soon.");
       reset();
@@ -215,9 +240,30 @@ export function Contact() {
                   id="message"
                   placeholder="Tell me about your project..."
                   rows={4}
+                  maxLength={2000}
                   {...register('message')}
                 />
+                <div className="flex justify-between">
+                  {errors.message ? (
+                    <p className="text-xs text-destructive">{errors.message.message}</p>
+                  ) : (
+                    <span />
+                  )}
+                  <p className="text-xs text-muted-foreground">
+                    {watch('message')?.length || 0}/2000
+                  </p>
+                </div>
               </div>
+
+              {/* Honeypot — invisible to humans, bots auto-fill it */}
+              <input
+                type="text"
+                {...register('website')}
+                className="sr-only"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+              />
 
               <button
                 type="submit"
