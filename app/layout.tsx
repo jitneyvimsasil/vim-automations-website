@@ -5,13 +5,13 @@ import { Toaster } from 'sonner'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'vim-automations | AI Automation Portfolio',
+  title: 'vim-automations | Automating Excellence',
   description:
     'Building intelligent automation solutions — n8n workflows, AI integrations, and production web apps.',
   keywords: ['AI automation', 'n8n', 'workflow automation', 'web apps', 'AI agents'],
   authors: [{ name: 'vim-automations' }],
   openGraph: {
-    title: 'vim-automations | AI Automation Portfolio',
+    title: 'vim-automations | Automating Excellence',
     description:
       'Building intelligent automation solutions that transform businesses.',
     type: 'website',
@@ -19,26 +19,13 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'vim-automations | AI Automation Portfolio',
+    title: 'vim-automations | Automating Excellence',
     description:
       'Building intelligent automation solutions that transform businesses.',
   },
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: '/vim-automations-logo-1.png',
+    apple: '/vim-automations-logo-1.png',
   },
 }
 
