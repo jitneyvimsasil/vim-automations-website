@@ -58,6 +58,23 @@ html.light {
   --muted-foreground: #5a7a62;
   --accent: #00272b;
   --accent-foreground: #e0ff4f;
+  --ring: #00272b;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --radius: 0.5rem;
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: #ffffff;
+  --sidebar-foreground: #00272b;
+  --sidebar-primary: #00272b;
+  --sidebar-primary-foreground: #e0ff4f;
+  --sidebar-accent: #e8f5e9;
+  --sidebar-accent-foreground: #00272b;
+  --sidebar-border: #c8e6c9;
+  --sidebar-ring: #00272b;
 }
 
 /* Dark mode uses :root values by default — this block is for shadcn/ui compatibility */

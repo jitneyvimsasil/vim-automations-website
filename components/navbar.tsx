@@ -8,18 +8,19 @@ import { usePathname } from 'next/navigation';
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('dark');
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
     try {
       const savedTheme = localStorage.getItem('theme');
-      const validTheme = savedTheme === 'dark' ? 'dark' : 'light';
+      const validTheme = savedTheme === 'light' ? 'light' : 'dark';
       setTheme(validTheme);
-      document.documentElement.classList.toggle('dark', validTheme === 'dark');
+      document.documentElement.classList.remove('dark', 'light');
+      document.documentElement.classList.add(validTheme);
     } catch {
-      setTheme('light');
+      setTheme('dark');
     }
 
     const handleScroll = () => {
@@ -39,7 +40,8 @@ export function Navbar() {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
-    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+    document.documentElement.classList.remove('dark', 'light');
+    document.documentElement.classList.add(newTheme);
   };
 
   return (
