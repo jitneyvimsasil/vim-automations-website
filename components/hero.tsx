@@ -194,7 +194,7 @@ function WorkflowVisual() {
 
       {/* Floating status badges around the diagram */}
       <motion.div
-        className="absolute top-4 right-8 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#e0ff4f]/8 border border-[#e0ff4f]/15 text-[10px] text-[#e0ff4f]/70 font-medium"
+        className="absolute top-4 right-8 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/8 border border-primary/15 text-[10px] text-primary/70 font-medium"
         initial={{ opacity: 0, x: 10 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 1.6, duration: 0.5 }}
@@ -222,7 +222,7 @@ export function Hero() {
             animate="visible"
           >
             <motion.div variants={fadeUp}>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#e0ff4f]/10 text-[#e0ff4f] text-xs font-semibold tracking-wide mb-6">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold tracking-wide mb-6">
                 <Zap className="w-3 h-3" />
                 AI Automation Developer
               </span>
@@ -230,7 +230,7 @@ export function Hero() {
 
             <motion.h1
               variants={fadeUp}
-              className="text-4xl md:text-5xl lg:text-[3.4rem] font-bold leading-[1.1] mb-6 bg-gradient-to-r from-[#e0ff4f] to-[#a0c830] bg-clip-text text-transparent"
+              className="text-4xl md:text-5xl lg:text-[3.4rem] font-bold leading-[1.1] mb-6 bg-gradient-to-r from-primary to-[#a0c830] bg-clip-text text-transparent"
             >
               I build AI-powered workflows that run your business on autopilot
             </motion.h1>
@@ -256,7 +256,7 @@ export function Hero() {
               </a>
               <a
                 href="#projects"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold border border-[#e0ff4f]/40 text-[#e0ff4f] hover:bg-[#e0ff4f]/10 hover:border-[#e0ff4f]/60 transition-all duration-200"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold border border-primary/40 text-primary hover:bg-primary/10 hover:border-primary/60 transition-all duration-200"
               >
                 See My Work
               </a>
@@ -266,7 +266,7 @@ export function Hero() {
               variants={fadeUp}
               className="flex items-center gap-2 text-sm text-muted-foreground"
             >
-              <CircleCheck className="w-4 h-4 text-[#e0ff4f]/60" />
+              <CircleCheck className="w-4 h-4 text-primary/60" />
               <span>3 projects shipped &middot; n8n &middot; Claude AI &middot; Next.js</span>
             </motion.div>
           </motion.div>

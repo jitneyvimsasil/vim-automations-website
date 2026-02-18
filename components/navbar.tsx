@@ -80,19 +80,19 @@ export function Navbar() {
                 window.location.href = '/#projects';
               }
             }}
-            className="text-sm text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200"
+            className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
           >
             Projects
           </button>
           <Link
             href="/blog"
-            className="text-sm text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200"
+            className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
           >
             Blog
           </Link>
           <Link
             href="/about"
-            className="text-sm text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200"
+            className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
           >
             About
           </Link>
@@ -163,19 +163,19 @@ export function Navbar() {
                   window.location.href = '/#projects';
                 }
               }}
-              className="text-sm text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200 text-left"
+              className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 text-left"
             >
               Projects
             </button>
             <Link
               href="/blog"
-              className="text-sm text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200"
+              className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
             >
               Blog
             </Link>
             <Link
               href="/about"
-              className="text-sm text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200"
+              className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
             >
               About
             </Link>

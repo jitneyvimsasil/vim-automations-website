@@ -220,7 +220,7 @@ export function LogoMarquee() {
   return (
     <section className="py-16 px-6 overflow-hidden" aria-label="Technologies used">
       <div className="max-w-5xl mx-auto mb-10">
-        <h3 className="text-xs font-bold uppercase tracking-[0.2em] bg-gradient-to-r from-[#e0ff4f] to-[#a0c830] bg-clip-text text-transparent text-center">
+        <h3 className="text-xs font-bold uppercase tracking-[0.2em] bg-gradient-to-r from-primary to-[#a0c830] bg-clip-text text-transparent text-center">
           Tools & Technologies
         </h3>
       </div>

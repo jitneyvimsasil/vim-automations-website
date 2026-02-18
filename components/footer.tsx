@@ -12,25 +12,25 @@ export function Footer() {
         <div className="flex gap-8">
           <Link
             href="/about"
-            className="text-xs font-medium text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200"
+            className="text-xs font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
           >
             About
           </Link>
           <Link
             href="/blog"
-            className="text-xs font-medium text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200"
+            className="text-xs font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
           >
             Blog
           </Link>
           <a
             href="#projects"
-            className="text-xs font-medium text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200"
+            className="text-xs font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
           >
             Projects
           </a>
           <a
             href="#contact"
-            className="text-xs font-medium text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200"
+            className="text-xs font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
           >
             Contact
           </a>

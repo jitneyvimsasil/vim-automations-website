@@ -110,10 +110,10 @@ export function Contact() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
           {/* Left column — Info + Social */}
           <div>
-            <span className="text-xs font-bold uppercase tracking-[0.2em] bg-gradient-to-r from-[#e0ff4f] to-[#a0c830] bg-clip-text text-transparent">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] bg-gradient-to-r from-primary to-[#a0c830] bg-clip-text text-transparent">
               Contact
             </span>
-            <h2 className="text-3xl md:text-4xl font-semibold mt-3 mb-4 bg-gradient-to-r from-[#e0ff4f] to-[#a0c830] bg-clip-text text-transparent">
+            <h2 className="text-3xl md:text-4xl font-semibold mt-3 mb-4 bg-gradient-to-r from-primary to-[#a0c830] bg-clip-text text-transparent">
               Let&apos;s Build Something Together
             </h2>
             <p className="text-base text-muted-foreground leading-relaxed mb-8">
@@ -127,7 +127,7 @@ export function Contact() {
                 href="https://github.com/jitneyvimsasil"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 text-[#e0ff4f] bg-[#e0ff4f]/10 rounded-lg hover:bg-[#e0ff4f]/20 transition-all duration-200 hover:scale-110"
+                className="p-3 text-primary bg-primary/10 rounded-lg hover:bg-primary/20 transition-all duration-200 hover:scale-110"
                 aria-label="GitHub"
               >
                 <Github className="w-5 h-5" />
@@ -136,7 +136,7 @@ export function Contact() {
                 href="https://www.linkedin.com/in/jitneyvimsasil/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 text-[#e0ff4f] bg-[#e0ff4f]/10 rounded-lg hover:bg-[#e0ff4f]/20 transition-all duration-200 hover:scale-110"
+                className="p-3 text-primary bg-primary/10 rounded-lg hover:bg-primary/20 transition-all duration-200 hover:scale-110"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-5 h-5" />
@@ -145,7 +145,7 @@ export function Contact() {
                 href="https://www.facebook.com/profile.php?id=61587438807218"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 text-[#e0ff4f] bg-[#e0ff4f]/10 rounded-lg hover:bg-[#e0ff4f]/20 transition-all duration-200 hover:scale-110"
+                className="p-3 text-primary bg-primary/10 rounded-lg hover:bg-primary/20 transition-all duration-200 hover:scale-110"
                 aria-label="Facebook"
               >
                 <Facebook className="w-5 h-5" />
@@ -154,14 +154,14 @@ export function Contact() {
                 href="https://www.threads.com/@jitneeey"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 text-[#e0ff4f] bg-[#e0ff4f]/10 rounded-lg hover:bg-[#e0ff4f]/20 transition-all duration-200 hover:scale-110"
+                className="p-3 text-primary bg-primary/10 rounded-lg hover:bg-primary/20 transition-all duration-200 hover:scale-110"
                 aria-label="Threads"
               >
                 <ThreadsIcon className="w-5 h-5" />
               </a>
               <a
                 href="mailto:jitneyvimsasil@gmail.com"
-                className="p-3 text-[#e0ff4f] bg-[#e0ff4f]/10 rounded-lg hover:bg-[#e0ff4f]/20 transition-all duration-200 hover:scale-110"
+                className="p-3 text-primary bg-primary/10 rounded-lg hover:bg-primary/20 transition-all duration-200 hover:scale-110"
                 aria-label="Email"
               >
                 <Mail className="w-5 h-5" />
