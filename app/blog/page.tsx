@@ -37,7 +37,7 @@ const posts: BentoCard[] = [
     icon: <Newspaper className="w-6 h-6" />,
   },
   {
-    title: 'Dental Lead Generation System',
+    title: 'AI Dental Receptionist',
     description:
       'A 3-workflow n8n system that qualifies dental leads via AI chat, scores them 1–10, auto-books appointments to Google Calendar, logs to a CRM sheet, and sends Gmail notifications — no human receptionist needed.',
     href: '/blog/dental-lead-gen',

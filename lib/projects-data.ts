@@ -40,7 +40,7 @@ export const allProjects: Project[] = [
   },
   {
     id: '2',
-    title: 'Dental Lead Generation System',
+    title: 'AI Dental Receptionist',
     description:
       'AI receptionist that qualifies dental leads via chat, scores them 1–10, auto-books appointments to Google Calendar, logs to a CRM sheet, and sends confirmation emails — all without a human receptionist.',
     thumbnail: '/projects/dental-lead-gen.png',

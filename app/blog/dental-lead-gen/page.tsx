@@ -1,16 +1,16 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'How I Built an AI Dental Lead Generation System with n8n | vim-automations',
+  title: 'How I Built an AI Dental Receptionist with n8n | vim-automations',
   description:
-    'A deep dive into building a 3-workflow AI system that qualifies dental leads, scores them, books appointments to Google Calendar, and sends automated emails — all without a human receptionist.',
+    'A deep dive into building a 3-workflow AI receptionist that qualifies dental leads, scores them, books appointments to Google Calendar, and sends automated emails — no human receptionist needed.',
 };
 
 export default function DentalLeadGenBlog() {
   return (
     <>
       <h1 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[#e0ff4f] to-[#a0c830] bg-clip-text text-transparent">
-        How I Built an AI Dental Receptionist That Qualifies Leads and Books Appointments Automatically
+        AI Dental Receptionist: Qualify Leads, Book Appointments, and Send Emails — Fully Automated
       </h1>
       <p className="text-muted-foreground mb-12 text-sm">February 2026</p>
 
