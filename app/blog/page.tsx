@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, Bot, Newspaper, Bookmark } from 'lucide-react';
+import { ArrowRight, Bot, Newspaper, Bookmark, Stethoscope } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Blog | vim-automations',
@@ -35,6 +35,14 @@ const posts: BentoCard[] = [
     href: '/blog/ai-trends-daily-publisher',
     tags: ['n8n', 'Claude AI', 'Tavily', 'IFTTT', 'Facebook'],
     icon: <Newspaper className="w-6 h-6" />,
+  },
+  {
+    title: 'Dental Lead Generation System',
+    description:
+      'A 3-workflow n8n system that qualifies dental leads via AI chat, scores them 1–10, auto-books appointments to Google Calendar, logs to a CRM sheet, and sends Gmail notifications — no human receptionist needed.',
+    href: '/blog/dental-lead-gen',
+    tags: ['n8n', 'Claude AI', 'Google Calendar', 'Google Sheets', 'Gmail'],
+    icon: <Stethoscope className="w-6 h-6" />,
   },
   {
     title: 'AI Bookmark Organizer',
