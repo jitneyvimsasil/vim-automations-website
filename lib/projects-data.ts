@@ -39,6 +39,18 @@ export const allProjects: Project[] = [
     featured: true,
   },
   {
+    id: '2',
+    title: 'Dental Lead Generation System',
+    description:
+      'AI receptionist that qualifies dental leads via chat, scores them 1–10, auto-books appointments to Google Calendar, logs to a CRM sheet, and sends confirmation emails — all without a human receptionist.',
+    thumbnail: '/placeholder.jpg',
+    videoUrl: '5q8o24xoG20',
+    category: 'n8n Workflow',
+    tags: ['n8n', 'Claude AI', 'Google Calendar', 'Google Sheets', 'Gmail'],
+    date: '2026-02-18',
+    featured: true,
+  },
+  {
     id: '4',
     title: 'AI Bookmark Organizer',
     description:
