@@ -18,7 +18,7 @@ export const allProjects: Project[] = [
     description:
       'n8n workflow that researches daily AI trends, composes a write-up, generates an image, and automatically posts to Facebook via IFTTT webhooks.',
     thumbnail: '/projects/ai-trends-publisher.png',
-    videoUrl: 'YOUR_YOUTUBE_VIDEO_ID_HERE',
+    videoUrl: 'O_2fguDMit8',
     blogUrl: '/blog/ai-trends-daily-publisher',
     category: 'n8n Workflow',
     tags: ['n8n', 'Claude AI', 'Tavily', 'IFTTT', 'Facebook'],
@@ -31,7 +31,7 @@ export const allProjects: Project[] = [
     description:
       'Chat-based fitness coaching app powered by Claude AI with gamification — daily streaks, XP levels, badges, and personalized workout and nutrition guidance.',
     thumbnail: '/projects/fitness-coach.png',
-    videoUrl: 'YOUR_YOUTUBE_VIDEO_ID_HERE',
+    videoUrl: '5Wi223bhv1A',
     blogUrl: '/blog/fitness-coach-ai',
     category: 'Full-Stack App',
     tags: ['Next.js', 'Claude AI', 'n8n', 'Supabase', 'Tailwind CSS'],
