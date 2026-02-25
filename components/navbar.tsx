@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Sun, Moon, Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -31,7 +32,6 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);
@@ -42,6 +42,16 @@ export function Navbar() {
     localStorage.setItem('theme', newTheme);
     document.documentElement.classList.remove('dark', 'light');
     document.documentElement.classList.add(newTheme);
+  };
+
+  const scrollToSection = (id: string) => {
+    setMenuOpen(false);
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.location.href = `/#${id}`;
+    }
   };
 
   return (
@@ -72,39 +82,31 @@ export function Navbar() {
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-6">
           <button
-            onClick={() => {
-              const el = document.getElementById('projects');
-              if (el) {
-                el.scrollIntoView({ behavior: 'smooth' });
-              } else {
-                window.location.href = '/#projects';
-              }
-            }}
-            className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+            onClick={() => scrollToSection('projects')}
+            className="text-sm text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200"
           >
             Projects
           </button>
+          <button
+            onClick={() => scrollToSection('services')}
+            className="text-sm text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200"
+          >
+            Services
+          </button>
           <Link
             href="/blog"
-            className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+            className="text-sm text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200"
           >
             Blog
           </Link>
           <Link
             href="/about"
-            className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+            className="text-sm text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200"
           >
             About
           </Link>
           <button
-            onClick={() => {
-              const el = document.getElementById('contact');
-              if (el) {
-                el.scrollIntoView({ behavior: 'smooth' });
-              } else {
-                window.location.href = '/#contact';
-              }
-            }}
+            onClick={() => scrollToSection('contact')}
             className="px-4 py-1.5 rounded-lg text-sm font-semibold bg-[#e0ff4f] text-[#00272b] hover:shadow-lg hover:shadow-[#e0ff4f]/30 hover:scale-105 transition-all duration-200"
           >
             Get in Touch
@@ -150,52 +152,50 @@ export function Navbar() {
       </div>
 
       {/* Mobile dropdown menu */}
-      {menuOpen && (
-        <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-sm">
-          <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-4">
-            <button
-              onClick={() => {
-                setMenuOpen(false);
-                const el = document.getElementById('projects');
-                if (el) {
-                  el.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                  window.location.href = '/#projects';
-                }
-              }}
-              className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 text-left"
-            >
-              Projects
-            </button>
-            <Link
-              href="/blog"
-              className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
-            >
-              Blog
-            </Link>
-            <Link
-              href="/about"
-              className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
-            >
-              About
-            </Link>
-            <button
-              onClick={() => {
-                setMenuOpen(false);
-                const el = document.getElementById('contact');
-                if (el) {
-                  el.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                  window.location.href = '/#contact';
-                }
-              }}
-              className="w-full mt-2 px-4 py-2 rounded-lg text-sm font-semibold bg-[#e0ff4f] text-[#00272b] hover:shadow-lg hover:shadow-[#e0ff4f]/30 transition-all duration-200 text-center"
-            >
-              Get in Touch
-            </button>
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="md:hidden border-t border-border bg-background/95 backdrop-blur-sm overflow-hidden"
+          >
+            <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-4">
+              <button
+                onClick={() => scrollToSection('projects')}
+                className="text-sm text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200 text-left"
+              >
+                Projects
+              </button>
+              <button
+                onClick={() => scrollToSection('services')}
+                className="text-sm text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200 text-left"
+              >
+                Services
+              </button>
+              <Link
+                href="/blog"
+                className="text-sm text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200"
+              >
+                Blog
+              </Link>
+              <Link
+                href="/about"
+                className="text-sm text-muted-foreground hover:text-[#e0ff4f] transition-colors duration-200"
+              >
+                About
+              </Link>
+              <button
+                onClick={() => scrollToSection('contact')}
+                className="w-full mt-2 px-4 py-2 rounded-lg text-sm font-semibold bg-[#e0ff4f] text-[#00272b] hover:shadow-lg hover:shadow-[#e0ff4f]/30 transition-all duration-200 text-center"
+              >
+                Get in Touch
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

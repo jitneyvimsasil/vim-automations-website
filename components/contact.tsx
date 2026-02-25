@@ -5,7 +5,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { toast } from 'sonner';
-import { Mail, Github, Linkedin, Facebook, Send, Loader2 } from 'lucide-react';
+import { Mail, Github, Linkedin, Facebook, Send, Loader2, Clock } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
@@ -16,6 +17,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+
+const ease = [0.22, 1, 0.36, 1] as const;
 
 function ThreadsIcon({ className }: { className?: string }) {
   return (
@@ -30,7 +33,7 @@ const contactSchema = z.object({
   email: z.string().email('Please enter a valid email'),
   projectType: z.string().min(1, 'Please select a project type'),
   message: z.string().max(2000, 'Message must be under 2000 characters').optional(),
-  website: z.string().max(0).optional(), // honeypot — bots fill this, humans don't see it
+  website: z.string().max(0).optional(),
 });
 
 const RATE_LIMIT = { max: 3, windowMs: 10 * 60 * 1000 } as const;
@@ -59,14 +62,12 @@ export function Contact() {
   });
 
   const onSubmit = async (data: ContactFormData) => {
-    // Honeypot check — bots fill this hidden field, humans never see it
     if (data.website) {
       toast.success("Message sent! I'll get back to you soon.");
       reset();
       return;
     }
 
-    // Rate limiting — max 3 submissions per 10 minutes
     const now = Date.now();
     const stored: number[] = JSON.parse(localStorage.getItem('contact_submissions') || '[]');
     const recent = stored.filter((t) => now - t < RATE_LIMIT.windowMs);
@@ -105,29 +106,40 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 px-6">
+    <section id="contact" className="py-20 px-6 bg-card">
       <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
           {/* Left column — Info + Social */}
-          <div>
-            <span className="text-xs font-bold uppercase tracking-[0.2em] bg-gradient-to-r from-primary to-[#a0c830] bg-clip-text text-transparent">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease }}
+          >
+            <span className="text-xs font-bold uppercase tracking-[0.2em] bg-gradient-to-r from-[#e0ff4f] to-[#a0c830] bg-clip-text text-transparent">
               Contact
             </span>
-            <h2 className="text-3xl md:text-4xl font-semibold mt-3 mb-4 bg-gradient-to-r from-primary to-[#a0c830] bg-clip-text text-transparent">
+            <h2 className="text-3xl md:text-4xl font-semibold mt-3 mb-4 bg-gradient-to-r from-[#e0ff4f] to-[#a0c830] bg-clip-text text-transparent">
               Let&apos;s Build Something Together
             </h2>
-            <p className="text-base text-muted-foreground leading-relaxed mb-8">
+            <p className="text-base text-muted-foreground leading-relaxed mb-5">
               Have a workflow to automate, an AI agent to build, or an app idea
               to bring to life? Tell me about your project and I&apos;ll get
               back to you within 24 hours.
             </p>
+
+            {/* Response time badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#e0ff4f]/10 border border-[#e0ff4f]/15 text-sm mb-8">
+              <Clock className="w-3.5 h-3.5 text-[#e0ff4f]" />
+              <span className="text-muted-foreground">Usually responds within 24 hours</span>
+            </div>
 
             <div className="flex gap-3 mb-8">
               <a
                 href="https://github.com/jitneyvimsasil"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 text-primary bg-primary/10 rounded-lg hover:bg-primary/20 transition-all duration-200 hover:scale-110"
+                className="p-3 text-[#e0ff4f] bg-[#e0ff4f]/10 rounded-lg hover:bg-[#e0ff4f]/20 transition-all duration-200 hover:scale-110"
                 aria-label="GitHub"
               >
                 <Github className="w-5 h-5" />
@@ -136,7 +148,7 @@ export function Contact() {
                 href="https://www.linkedin.com/in/jitneyvimsasil/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 text-primary bg-primary/10 rounded-lg hover:bg-primary/20 transition-all duration-200 hover:scale-110"
+                className="p-3 text-[#e0ff4f] bg-[#e0ff4f]/10 rounded-lg hover:bg-[#e0ff4f]/20 transition-all duration-200 hover:scale-110"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-5 h-5" />
@@ -145,7 +157,7 @@ export function Contact() {
                 href="https://www.facebook.com/profile.php?id=61587438807218"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 text-primary bg-primary/10 rounded-lg hover:bg-primary/20 transition-all duration-200 hover:scale-110"
+                className="p-3 text-[#e0ff4f] bg-[#e0ff4f]/10 rounded-lg hover:bg-[#e0ff4f]/20 transition-all duration-200 hover:scale-110"
                 aria-label="Facebook"
               >
                 <Facebook className="w-5 h-5" />
@@ -154,23 +166,28 @@ export function Contact() {
                 href="https://www.threads.com/@jitneeey"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 text-primary bg-primary/10 rounded-lg hover:bg-primary/20 transition-all duration-200 hover:scale-110"
+                className="p-3 text-[#e0ff4f] bg-[#e0ff4f]/10 rounded-lg hover:bg-[#e0ff4f]/20 transition-all duration-200 hover:scale-110"
                 aria-label="Threads"
               >
                 <ThreadsIcon className="w-5 h-5" />
               </a>
               <a
                 href="mailto:jitneyvimsasil@gmail.com"
-                className="p-3 text-primary bg-primary/10 rounded-lg hover:bg-primary/20 transition-all duration-200 hover:scale-110"
+                className="p-3 text-[#e0ff4f] bg-[#e0ff4f]/10 rounded-lg hover:bg-[#e0ff4f]/20 transition-all duration-200 hover:scale-110"
                 aria-label="Email"
               >
                 <Mail className="w-5 h-5" />
               </a>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right column — Form */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.15, ease }}
+          >
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="space-y-5 p-6 rounded-xl bg-gradient-to-br from-[#e0ff4f]/5 to-[#00272b]/10 border border-[#e0ff4f]/20"
@@ -255,7 +272,7 @@ export function Contact() {
                 </div>
               </div>
 
-              {/* Honeypot — invisible to humans, bots auto-fill it */}
+              {/* Honeypot */}
               <input
                 type="text"
                 {...register('website')}
@@ -283,7 +300,7 @@ export function Contact() {
                 )}
               </button>
             </form>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

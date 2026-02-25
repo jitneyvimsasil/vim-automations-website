@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Mail, Facebook } from 'lucide-react';
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 interface Logo {
   name: string;
   icon: React.ReactNode;
@@ -108,7 +110,7 @@ const row2Logos: Logo[] = [
     color: '#ec4899',
     icon: (
       <span className="w-8 h-8 flex items-center justify-center text-base font-bold">
-        🌸
+        P
       </span>
     ),
   },
@@ -218,23 +220,30 @@ function MarqueeRow({ logos, reverse = false }: { logos: Logo[]; reverse?: boole
 
 export function LogoMarquee() {
   return (
-    <section className="py-16 px-6 overflow-hidden" aria-label="Technologies used">
-      <div className="max-w-5xl mx-auto mb-10">
-        <h3 className="text-xs font-bold uppercase tracking-[0.2em] bg-gradient-to-r from-primary to-[#a0c830] bg-clip-text text-transparent text-center">
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.6, ease }}
+      className="py-16 px-6 overflow-hidden"
+      aria-label="Technologies used"
+    >
+      <div className="max-w-5xl mx-auto mb-10 text-center">
+        <h3 className="text-xs font-bold uppercase tracking-[0.2em] bg-gradient-to-r from-[#e0ff4f] to-[#a0c830] bg-clip-text text-transparent">
           Tools & Technologies
         </h3>
+        <p className="text-sm text-muted-foreground mt-2">
+          The tools and platforms I build with every day.
+        </p>
       </div>
       <div className="relative space-y-6 max-w-5xl mx-auto">
         {/* Gradient fade edges */}
         <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[var(--background)] to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[var(--background)] to-transparent z-10 pointer-events-none" />
 
-        {/* Row 1: scrolls left */}
         <MarqueeRow logos={row1Logos} />
-
-        {/* Row 2: scrolls right */}
         <MarqueeRow logos={row2Logos} reverse />
       </div>
-    </section>
+    </motion.section>
   );
 }

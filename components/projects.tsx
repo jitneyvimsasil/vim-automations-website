@@ -4,12 +4,15 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Play, ExternalLink, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import {
   Dialog,
   DialogContent,
   DialogTitle,
 } from '@/components/ui/dialog';
 import { allProjects, type Project } from '@/lib/projects-data';
+
+const ease = [0.22, 1, 0.36, 1] as const;
 
 const featuredProjects = allProjects.filter((p) => p.featured);
 const recentProjects = allProjects.filter((p) => !p.featured);
@@ -37,9 +40,7 @@ export function ProjectCard({ project }: { project: Project }) {
         onMouseLeave={() => setIsHovered(false)}
       >
         {/* Thumbnail */}
-        <div
-          className="w-full aspect-video rounded-xl mb-4 relative overflow-hidden border border-[#e0ff4f]/20 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-[#e0ff4f]/20"
-        >
+        <div className="w-full aspect-video rounded-xl mb-4 relative overflow-hidden border border-[#e0ff4f]/20 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-[#e0ff4f]/20">
           <Image
             src={project.thumbnail}
             alt={project.title}
@@ -64,12 +65,10 @@ export function ProjectCard({ project }: { project: Project }) {
         <div className="flex justify-between items-start mb-2">
           {project.blogUrl ? (
             <Link href={project.blogUrl} className="flex items-start gap-2 group/link">
-              <h3 className="text-base font-semibold text-foreground group-hover/link:bg-gradient-to-r group-hover/link:from-primary group-hover/link:to-[#a0c830] group-hover/link:bg-clip-text group-hover/link:text-transparent transition-all duration-300">
+              <h3 className="text-base font-semibold text-foreground group-hover/link:bg-gradient-to-r group-hover/link:from-[#e0ff4f] group-hover/link:to-[#a0c830] group-hover/link:bg-clip-text group-hover/link:text-transparent transition-all duration-300">
                 {project.title}
               </h3>
-              <ExternalLink
-                className="w-4 h-4 text-primary transition-all duration-300 flex-shrink-0 mt-0.5 opacity-50 group-hover/link:opacity-100 group-hover/link:scale-125"
-              />
+              <ExternalLink className="w-4 h-4 text-[#e0ff4f] transition-all duration-300 flex-shrink-0 mt-0.5 opacity-50 group-hover/link:opacity-100 group-hover/link:scale-125" />
             </Link>
           ) : (
             <h3 className="text-base font-semibold text-foreground">
@@ -85,7 +84,7 @@ export function ProjectCard({ project }: { project: Project }) {
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-2 py-0.5 rounded-full text-xs font-medium text-primary/80 bg-primary/10 border border-primary/15"
+                className="px-2 py-0.5 rounded-full text-xs font-medium text-[#e0ff4f]/80 bg-[#e0ff4f]/10 border border-[#e0ff4f]/15"
               >
                 {tag}
               </span>
@@ -124,32 +123,58 @@ export function Projects() {
   return (
     <section id="projects" className="py-20 px-6">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-semibold mb-16 bg-gradient-to-r from-primary to-[#a0c830] bg-clip-text text-transparent">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease }}
+          className="text-3xl md:text-4xl font-semibold mb-16 bg-gradient-to-r from-[#e0ff4f] to-[#a0c830] bg-clip-text text-transparent"
+        >
           Projects
-        </h2>
+        </motion.h2>
 
         {projectSections.map((section, sectionIdx) => (
           <div key={sectionIdx} className="mb-20">
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] bg-gradient-to-r from-primary to-[#a0c830] bg-clip-text text-transparent mb-8">
+            <motion.h3
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, ease }}
+              className="text-xs font-bold uppercase tracking-[0.2em] bg-gradient-to-r from-[#e0ff4f] to-[#a0c830] bg-clip-text text-transparent mb-8"
+            >
               {section.title}
-            </h3>
+            </motion.h3>
             <div className="grid gap-8 grid-cols-1 md:grid-cols-2">
-              {section.projects.map((project) => (
-                <ProjectCard key={project.id} project={project} />
+              {section.projects.map((project, index) => (
+                <motion.div
+                  key={project.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ duration: 0.5, delay: index * 0.1, ease }}
+                >
+                  <ProjectCard project={project} />
+                </motion.div>
               ))}
             </div>
           </div>
         ))}
 
-        <div className="flex justify-center">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease }}
+          className="flex justify-center"
+        >
           <Link
             href="/projects"
-            className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors duration-200 group"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#e0ff4f] hover:text-[#e0ff4f]/80 transition-colors duration-200 group"
           >
             View all projects
             <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
           </Link>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
